@@ -17,9 +17,12 @@ def manejar_Clientes(conexion,direccion):
             if not mensaje:
                 break
             print(f"{direccion}: {mensaje}")
+            respuesta=f"Servidor: recibi tu mensaje: {mensaje}"
+            conexion.sendall(respuesta.encode("utf-8"))
             for cli in clientes:
                 if cli !=conexion:
                     cli.sendall(mensaje.encode("utf-8"))
+                    cli.sendall(f"{direccion}: {mensaje}".encode("utf-8"))
         except:
             break
     print(f"[-] Cliente Desconectado {direccion}")
