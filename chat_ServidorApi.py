@@ -14,6 +14,12 @@ clientes=[]
 
 #Paso 3. Funcion para manejar clientes
 def manejar_Clientes(conexion,direccion):
+    #PASO 2. CONFIGURAR LA API
+    genai.configure(api_key="su api key")
+
+    #PASO 3. CREAR EL MODELO
+    modelo=genai.GenerativeModel("gemini-2.0-flash-lite")
+   
     print(f"Nueva direccion: {direccion}")
     while True:
         try:
@@ -21,8 +27,10 @@ def manejar_Clientes(conexion,direccion):
             if not mensaje:
                 break
             print(f"{direccion}: {mensaje}")
-            respuesta=f"Servidor: recibi tu mensaje: {mensaje}"
-            conexion.sendall(respuesta.encode("utf-8"))
+            respuesta=modelo.generate_content(contents=mensaje)
+            respuestaTexto=respuesta.text
+            print(respuestaTexto)
+            conexion.sendall(respuestaTexto.encode("utf-8"))
             for cli in clientes:
                 if cli !=conexion:
                     cli.sendall(mensaje.encode("utf-8"))
