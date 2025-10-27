@@ -1,8 +1,9 @@
 import socket
 import threading
+import os
 
 host="127.0.0.1"
-puerto=5555
+puerto=1234
 
 def recibir(sock):
     while True:
