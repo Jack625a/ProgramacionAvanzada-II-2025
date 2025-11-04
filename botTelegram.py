@@ -9,7 +9,7 @@ genai.configure(api_key="SU API KEY DE GOOGLE CLOUD")
 modelo = genai.GenerativeModel("gemini-2.5-flash-lite-preview-09-2025")
 
 # Paso 3. Configurar el token del bot
-tokenTelegram = "TOKEN DE TELEGRAM"
+tokenTelegram = "TOKEN DETELEGRAM"
 
 # Paso 4. Comando /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
